@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-HK">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -117,14 +117,14 @@
 
       <section class="cart" style="margin-top:24px;border:1px solid var(--line);border-radius:12px;padding:16px;">
         <div style="display:flex;justify-content:space-between;align-items:center;">
-          <strong>購物車</strong>
-          <a class="btn" id="clearCart" href="#">清空</a>
+          <strong>Cart</strong>
+          <a class="btn" id="clearCart" href="#">Clear</a>
         </div>
-        <div id="cartList" class="muted" style="margin:8px 0 12px 0;">（暫無商品）</div>
+        <div id="cartList" class="muted" style="margin:8px 0 12px 0;">（No items in cart）</div>
         <div class="actions">
-          <a class="btn buy" id="checkoutBtn" href="#">一次結帳（Stripe）</a>
+          <a class="btn buy" id="checkoutBtn" href="#">Checkout (Stripe)</a>
         </div>
-        <p class="muted" style="margin-top:6px;font-size:12px;">會自動加一次運費（由 Stripe Shipping rate 控制）。</p>
+        <p class="muted" style="margin-top:6px;font-size:12px;">A one-time shipping fee will be applied (controlled by Stripe Shipping rate).。</p>
       </section>
 
       <footer>
@@ -145,9 +145,9 @@
         const card = document.createElement('article');
         card.className = 'card';
         const sizeSelect = p.has_sizes ? `
-          <label class="muted" style="font-size:12px;">尺碼</label>
+          <label class="muted" style="font-size:12px;">Size</label>
           <select data-size style="height:32px;border:1px solid var(--line);border-radius:8px;padding:4px">
-            <option value="">請選擇</option>
+            <option value="">Please select</option>
             <option value="S">S</option>
             <option value="M">M</option>
             <option value="L">L</option>
@@ -158,13 +158,13 @@
           <div class="thumb"><img src="${p.image}" alt="${p.name}" style="transform: scale(${p.scale || 1})"></div>
           <div class="body">
             <h3 class="title">${p.name}</h3>
-            <p class="desc">${p.has_sizes ? '可選 S / M / L / XL' : 'One Size'}</p>
+            <p class="desc">${p.has_sizes ? 'Available in S / M / L / XL' : 'One Size'}</p>
             <div class="price">${p.price_hkd ? hkd(p.price_hkd*100) : ''}</div>
             <div class="actions" style="display:flex;gap:8px;align-items:center;margin-top:8px">
               ${sizeSelect}
-              <label class="muted" style="font-size:12px;">數量</label>
+              <label class="muted" style="font-size:12px;">Quantity</label>
               <input type="number" data-qty min="0" value="1" style="width:70px;height:32px;border:1px solid var(--line);border-radius:8px;padding:4px">
-              <a class="btn buy" href="#" data-add>加入購物車</a>
+              <a class="btn buy" href="#" data-add>加入Cart</a>
             </div>
           </div>`;
 
@@ -176,7 +176,7 @@
           let size = null;
           if (p.has_sizes) {
             size = card.querySelector('[data-size]').value;
-            if (!size) { alert('請先選擇尺碼'); return; }
+            if (!size) { alert('請先選擇Size'); return; }
           }
           cart.push({
             id: p.id,
@@ -194,7 +194,7 @@
 
     function renderCart(){
       const node = document.getElementById('cartList');
-      if (cart.length === 0) { node.textContent = '（暫無商品）'; return; }
+      if (cart.length === 0) { node.textContent = '（No items in cart）'; return; }
       node.innerHTML = cart.map(it => {
         const extra = it.metadata && it.metadata.size ? ` / Size: ${it.metadata.size}` : '';
         return `<div>• ${it.name}${extra} × ${it.quantity}</div>`;
@@ -205,7 +205,7 @@
 
     document.getElementById('checkoutBtn').addEventListener('click', async e => {
       e.preventDefault();
-      if (cart.length === 0) { alert('購物車是空的'); return; }
+      if (cart.length === 0) { alert('Cart是空的'); return; }
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -213,7 +213,7 @@
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
-      else alert(data.error || '出錯了，請稍後再試');
+      else alert(data.error || 'Something went wrong, please try again later');
     });
 
     fetch('data/products.json')

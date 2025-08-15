@@ -4,7 +4,7 @@
     "name": "Full-time catkeeper Cap",
     "image": "images/hat1.png",
     "price_hkd": 400,
-    "stripe_price_id": "price_1ABCxyz...",
+    "stripe_price_id": "prod_Ss2OYFzkFUOO8A",
     "has_sizes": false,
     "scale": 0.7
   },
@@ -13,7 +13,7 @@
     "name": "T-shirt 'I work hard so my cat can live a better life'",
     "image": "images/tshirt1.jpg",
     "price_hkd": 350,
-    "stripe_price_id": "prctbl_1RwKyeCZXgrpm9QGEleugVdx",
+    "stripe_price_id": "price_1RwIJpCZXgrpm9QG8Cpplm1W",
     "has_sizes": true,
     "scale": 0.6
   }

@@ -113,35 +113,19 @@
       </section>
 
       <!-- 產品網格：複製 .card 區塊即可新增產品 -->
-      <section class="grid">
-        <article class="card">
-  <div class="thumb"><img class="scale-70" src="images/hat1.png" alt="Full-time catkeeper Cap" /></div>
-  <div class="body">
-    <h3 class="title">Full-time catkeeper Cap</h3>
-    <p class="desc"> One Size
-      
-    </p>
-    <div class="price">HK$ 400</div>
-    <div class="actions">
-      <a class="btn buy" href="https://buy.stripe.com/cNi00i8uO8VhacxfKOfjG00" target="_blank" rel="noopener">BUY NOW</a>
-    </div>
-  </div>
-</article>
+      <section class="grid" id="productGrid"></section>
 
-   <article class="card">
-          <div class="thumb"><img class="scale-60" src="images/tshirt1.jpg" alt="T-shirt'I work hard so my cat can live a better life" /></div>
-          <div class="body">
-            <h3 class="title">T-shirt'I work hard so my cat can live a better life'</h3>
-            <p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
-            <div class="price">HK$ 350</div>
-            <div class="actions">
-              <a class="btn buy" href="https://buy.stripe.com/00w6oG6mG0oL5WhcyCfjG01" target="_blank" rel="noopener">BUY NOW</a>
-            </div>
-          </div>
-        </article>
-
-
-              </section>
+      <section class="cart" style="margin-top:24px;border:1px solid var(--line);border-radius:12px;padding:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <strong>購物車</strong>
+          <a class="btn" id="clearCart" href="#">清空</a>
+        </div>
+        <div id="cartList" class="muted" style="margin:8px 0 12px 0;">（暫無商品）</div>
+        <div class="actions">
+          <a class="btn buy" id="checkoutBtn" href="#">一次結帳（Stripe）</a>
+        </div>
+        <p class="muted" style="margin-top:6px;font-size:12px;">會自動加一次運費（由 Stripe Shipping rate 控制）。</p>
+      </section>
 
       <footer>
         <div>© <span id="year"></span> The little Market · </div>
@@ -149,5 +133,95 @@
     </div>
 
     <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-  </body>
+    <script>
+    const cart = [];
+
+    function hkd(n){ return 'HK$ ' + (n/100).toFixed(0); }
+
+    function renderProducts(list){
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'card';
+        const sizeSelect = p.has_sizes ? `
+          <label class="muted" style="font-size:12px;">尺碼</label>
+          <select data-size style="height:32px;border:1px solid var(--line);border-radius:8px;padding:4px">
+            <option value="">請選擇</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>` : '';
+
+        card.innerHTML = `
+          <div class="thumb"><img src="${p.image}" alt="${p.name}" style="transform: scale(${p.scale || 1})"></div>
+          <div class="body">
+            <h3 class="title">${p.name}</h3>
+            <p class="desc">${p.has_sizes ? '可選 S / M / L / XL' : 'One Size'}</p>
+            <div class="price">${p.price_hkd ? hkd(p.price_hkd*100) : ''}</div>
+            <div class="actions" style="display:flex;gap:8px;align-items:center;margin-top:8px">
+              ${sizeSelect}
+              <label class="muted" style="font-size:12px;">數量</label>
+              <input type="number" data-qty min="0" value="1" style="width:70px;height:32px;border:1px solid var(--line);border-radius:8px;padding:4px">
+              <a class="btn buy" href="#" data-add>加入購物車</a>
+            </div>
+          </div>`;
+
+        const btn = card.querySelector('[data-add]');
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const qty = parseInt(card.querySelector('[data-qty]').value || '0', 10);
+          if (qty <= 0) return;
+          let size = null;
+          if (p.has_sizes) {
+            size = card.querySelector('[data-size]').value;
+            if (!size) { alert('請先選擇尺碼'); return; }
+          }
+          cart.push({
+            id: p.id,
+            name: p.name,
+            // Prefer price ID if filled; otherwise fallback to raw amount
+            ...(p.stripe_price_id ? { price: p.stripe_price_id } : { amount: (p.price_hkd*100) }),
+            quantity: qty,
+            metadata: size ? { size } : {}
+          });
+          renderCart();
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    function renderCart(){
+      const node = document.getElementById('cartList');
+      if (cart.length === 0) { node.textContent = '（暫無商品）'; return; }
+      node.innerHTML = cart.map(it => {
+        const extra = it.metadata && it.metadata.size ? ` / Size: ${it.metadata.size}` : '';
+        return `<div>• ${it.name}${extra} × ${it.quantity}</div>`;
+      }).join('');
+    }
+
+    document.getElementById('clearCart').addEventListener('click', e => { e.preventDefault(); cart.length = 0; renderCart(); });
+
+    document.getElementById('checkoutBtn').addEventListener('click', async e => {
+      e.preventDefault();
+      if (cart.length === 0) { alert('購物車是空的'); return; }
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: cart, currency: 'hkd' })
+      });
+      const data = await res.json();
+      if (data.url) window.location.href = data.url;
+      else alert(data.error || '出錯了，請稍後再試');
+    });
+
+    fetch('data/products.json')
+      .then(r => r.json())
+      .then(renderProducts)
+      .catch(() => {
+        document.getElementById('productGrid').innerHTML = '<p class="muted">載入商品清單失敗。</p>';
+      });
+  </script>
+</body>
 </html>

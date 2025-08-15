@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-HK">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Little Market｜網上商店</title>
+    <meta name="description" content="The Little Market" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      /* —— 極簡日系：白底、充足留白、細邊框、柔和灰 —— */
+      :root{
+        --bg:#ffffff;           /* 主要背景 */
+        --text:#1f2937;         /* 主文字 (slate-800) */
+        --muted:#6b7280;        /* 次文字 (gray-500) */
+        --line:#e5e7eb;         /* 細邊框 (gray-200) */
+        --accent:#111827;       /* 主要按鈕（黑灰）*/
+        --radius:14px;
+      }
+      *{box-sizing:border-box}
+      html,body{height:100%}
+      body{margin:0;background:var(--bg);color:var(--text);font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN',Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.7}
+      a{color:inherit}
+      img{max-width:100%;display:block}
+
+      .wrap{max-width:1080px;margin:0 auto;padding:24px}
+      header{padding:28px 0 8px;border-bottom:1px solid var(--line)}
+      .brand{display:flex;align-items:center;gap:12px}
+      .logo {
+  width: 150px;   /* 放大 Logo */
+  height:150px;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+  display: block;
+}
+
+.brand h1 {
+  font-size: 15px; /* 縮細店名字體 */
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+
+      .hero{padding:24px 0}
+      .notice{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#4b5563;font-size:14px}
+
+      .grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:22px}
+      @media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr)}}
+      @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+      .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.thumb {
+  width: 100%;
+  height: 220px; /* 固定高度，所有商品一致 */
+  background: #fff; /* 白底 */
+  display: flex;
+  align-items: center;  /* 垂直置中 */
+  justify-content: center; /* 水平置中 */
+  overflow: hidden; /* 超出裁切 */
+}
+.thumb img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 不同圖片個別縮放百分比 */
+.scale-100 { transform: scale(1); }
+.scale-90  { transform: scale(0.9); }
+.scale-80  { transform: scale(0.8); }
+.scale-70  { transform: scale(0.7); }
+.scale-60  { transform: scale(0.6); }
+.scale-50  { transform: scale(0.5); }
+
+      .body{padding:15px 15px 15px;display:flex;flex-direction:column;gap:8px}
+      .title{font-size:12px;margin:0}
+      .desc{margin:0;color:var(--muted);font-size:10px}
+      .price{margin-top:2px;font-weight:600;letter-spacing:0.02em}
+      .actions{margin-top:auto;display:flex;gap:10px}
+      .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;height:40px;border-radius:10px;border:1px solid var(--line);text-decoration:none;transition:transform .12s ease, box-shadow .12s ease}
+      .btn:hover{transform:translateY(-1px)}
+      .btn.buy {
+  background-color: #fff; /* 淺米色 */
+  color: #333333;           /* 黑灰字 */
+  border-color:var(--accent);
+}
+
+.btn.buy:hover {
+  background-color: #fb6f92; /* 滑鼠移上去淺啲 */
+}
+
+      .btn.more{background:#fff;color:var(--text)}
+
+      footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px}
+      .muted{color:var(--muted)}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <img class="logo" src="images/logo.jpg" alt="The Little Market Logo" />
+          <h1>The Little Market</h1>
+        </div>
+        <p class="tagline"></p>
+      </header>
+
+      <section class="hero">
+        <div class="notice">The Little Market is a tiny yet delightful market full of surprises.</div>
+      </section>
+
+      <!-- 產品網格：複製 .card 區塊即可新增產品 -->
+      <section class="grid">
+        <article class="card">
+  <div class="thumb"><img class="scale-70" src="images/hat1.png" alt="Full-time catkeeper Cap" /></div>
+  <div class="body">
+    <h3 class="title">Full-time catkeeper Cap</h3>
+    <p class="desc"> One Size
+      
+    </p>
+    <div class="price">HK$ 500</div>
+    <div class="actions">
+      <a class="btn buy" href="https://buy.stripe.com/test_28EcN47k1djb0Oh6TIdwc02" target="_blank" rel="noopener">BUY NOW</a>
+    </div>
+  </div>
+</article>
+
+   <article class="card">
+          <div class="thumb"><img class="scale-60" src="images/tshirt1.jpg" alt="T-shirt'I work hard so my cat can live a better life" /></div>
+          <div class="body">
+            <h3 class="title">T-shirt'I work hard so my cat can live a better life'</h3>
+            <p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
+            <div class="price">HK$ 350</div>
+            <div class="actions">
+              <a class="btn buy" href="https://buy.stripe.com/test_7sYcN4dIp4MF54x7XMdwc01" target="_blank" rel="noopener">BUY NOW</a>
+            </div>
+          </div>
+        </article>
+
+
+              </section>
+
+      <footer>
+        <div>© <span id="year"></span> The little Market · </div>
+      </footer>
+    </div>
+
+    <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  </body>
+</html>

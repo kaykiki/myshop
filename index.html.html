@@ -164,7 +164,7 @@
               ${sizeSelect}
               <label class="muted" style="font-size:12px;">Quantity</label>
               <input type="number" data-qty min="0" value="1" style="width:70px;height:32px;border:1px solid var(--line);border-radius:8px;padding:4px">
-              <a class="btn buy" href="#" data-add>加入Cart</a>
+              <a class="btn buy" href="#" data-add>Add to Cart</a>
             </div>
           </div>`;
 
@@ -176,7 +176,7 @@
           let size = null;
           if (p.has_sizes) {
             size = card.querySelector('[data-size]').value;
-            if (!size) { alert('請先選擇Size'); return; }
+            if (!size) { alert('Size'); return; }
           }
           cart.push({
             id: p.id,
@@ -205,7 +205,7 @@
 
     document.getElementById('checkoutBtn').addEventListener('click', async e => {
       e.preventDefault();
-      if (cart.length === 0) { alert('Cart是空的'); return; }
+      if (cart.length === 0) { alert('Cart is empty'); return; }
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

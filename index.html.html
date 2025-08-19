@@ -51,19 +51,31 @@
       @media(min-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
       @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
 
-      .card{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;      /* 原本無 → 加多啲內距 */
+  font-size: 1.05rem; /* 文字比例稍大 */
+}
+
 .thumb {
   width: 100%;
-  height: 220px; /* 固定高度，所有商品一致 */
-  background: #fff; /* 白底 */
+  height: 300px;  /* ← 由 220px 加大到 300px */
+  background: #fff;
   display: flex;
-  align-items: center;  /* 垂直置中 */
-  justify-content: center; /* 水平置中 */
-  overflow: hidden; /* 超出裁切 */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
+
 .thumb img {
   display: block;
   max-width: 100%;
+  max-height: 100%;  /* 確保圖片唔超出 thumb */
   height: auto;
 }
 

@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x",
+      "regions": ["sin1", "hkg1", "iad1"],
+      "maxDuration": 10
+    }
+  }
+}

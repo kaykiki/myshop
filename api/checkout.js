@@ -1,4 +1,4 @@
-// /api/checkout.js — LIVE mode ready, NO custom_fields (quickest to ship)
+// api/checkout.js  (CommonJS)
 const Stripe = require("stripe");
 
 module.exports = async function handler(req, res) {
@@ -10,8 +10,10 @@ module.exports = async function handler(req, res) {
 
     const key = process.env.STRIPE_SECRET_KEY;
     if (!key) return res.status(500).send("Missing STRIPE_SECRET_KEY");
+
     const stripe = Stripe(key);
 
+    // Body: { items: [{ priceId, quantity }] }
     const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
     const items = Array.isArray(body.items) ? body.items : [];
     if (!items.length) return res.status(400).send("No items");
@@ -28,8 +30,8 @@ module.exports = async function handler(req, res) {
       allow_promotion_codes: true,
       billing_address_collection: "auto",
       shipping_address_collection: { allowed_countries: ["HK", "GB"] },
-      success_url: `${req.headers.origin || "https://littlemarket.vercel.app"}/?success=true`,
-      cancel_url: `${req.headers.origin || "https://littlemarket.vercel.app"}/?canceled=true`,
+      success_url: `${req.headers.origin || "https://your-site.com"}/?success=true`,
+      cancel_url: `${req.headers.origin || "https://your-site.com"}/?canceled=true`,
     });
 
     return res.status(200).json({ url: session.url });

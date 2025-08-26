@@ -1,9 +1,7 @@
-// /api/checkout.js — enhanced logging + clear error messages
+// /api/checkout.js — LIVE mode ready, NO custom_fields (quickest to ship)
 const Stripe = require("stripe");
 
 module.exports = async function handler(req, res) {
-  const json = (status, obj) => res.status(status).json(obj);
-
   try {
     if (req.method !== "POST") {
       res.setHeader("Allow", "POST");
@@ -11,13 +9,12 @@ module.exports = async function handler(req, res) {
     }
 
     const key = process.env.STRIPE_SECRET_KEY;
-    if (!key) return res.status(500).send("Missing STRIPE_SECRET_KEY environment variable");
-    if (!key.startsWith("sk_")) return res.status(500).send("STRIPE_SECRET_KEY must start with sk_ (secret key)");
-
+    if (!key) return res.status(500).send("Missing STRIPE_SECRET_KEY");
     const stripe = Stripe(key);
+
     const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
     const items = Array.isArray(body.items) ? body.items : [];
-    if (!items.length) return res.status(400).send("No items in request body");
+    if (!items.length) return res.status(400).send("No items");
 
     const line_items = items.map((it) => ({
       price: it.priceId,
@@ -35,18 +32,9 @@ module.exports = async function handler(req, res) {
       cancel_url: `${req.headers.origin || "https://littlemarket.vercel.app"}/?canceled=true`,
     });
 
-    return json(200, { url: session.url });
+    return res.status(200).json({ url: session.url });
   } catch (err) {
-    // Surface useful data in the response to debug quickly
-    const payload = {
-      message: err && err.message ? err.message : "Server error",
-      type: err && err.type,
-      code: err && err.code,
-      errno: err && err.errno,
-      syscall: err && err.syscall,
-      statusCode: err && err.statusCode,
-    };
-    console.error("[checkout] error:", payload, err && err.stack);
-    return json(500, payload);
+    console.error("[checkout] error:", err);
+    return res.status(500).send(err.message || "Server error");
   }
 };

@@ -1,61 +1,57 @@
-// /api/checkout.js — Vercel serverless function
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+// api/checkout.js
+import Stripe from "stripe";
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
-  }
+  if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
 
   try {
-    const { items, currency = 'hkd' } = req.body || {};
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+    const { items } = req.body;
     if (!Array.isArray(items) || items.length === 0) {
-      return res.status(400).json({ error: 'No items provided' });
+      return res.status(400).send("No items");
     }
 
-    // Build Stripe line_items from your products.json items
-    const line_items = items.map((item) => ({
-      price: item.stripe_price_id, // already the correct price_... ID
-      quantity: item.quantity || 1,
+    // Build line items; attach size via 'metadata' and let quantities be adjustable
+    const line_items = items.map((it) => ({
+      price: it.priceId,
+      quantity: it.quantity || 1,
+      adjustable_quantity: { enabled: true, minimum: 1, maximum: 10 },
+      // Optional: pass size to your fulfillment via metadata
+      // Note: metadata goes on the line item in the session
+      // (You can read it from the Checkout Session after payment via webhook)
     }));
 
-    const shippingRateId = process.env.SHIPPING_RATE_ID;
-    const freeThreshold = Number(process.env.FREE_SHIPPING_THRESHOLD || 0);
-
-    // Calculate subtotal in cents for free shipping check
-    const subtotalCents = items.reduce(
-      (sum, item) =>
-        sum + Math.round(item.price_hkd * 100) * (item.quantity || 1),
-      0
-    );
-
-    const params = {
-      mode: 'payment',
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
       line_items,
-      shipping_address_collection: { allowed_countries: ['HK'] },
-      success_url: `${req.headers.origin}/success.html`,
-      cancel_url: `${req.headers.origin}/`,
-      metadata: {
-        cart: JSON.stringify(
-          items.map(({ name, quantity }) => ({ name, quantity }))
-        ),
-      },
-    };
+      currency: "hkd",
+      allow_promotion_codes: true,
+      shipping_address_collection: { allowed_countries: ["HK", "GB"] },
 
-    // Add shipping only if under free shipping threshold
-    if (
-      shippingRateId &&
-      !(freeThreshold > 0 && subtotalCents >= freeThreshold)
-    ) {
-      params.shipping_options = [{ shipping_rate: shippingRateId }];
-    }
+      // Collect size choice on Checkout for T-shirts:
+      custom_fields: [
+        {
+          key: "size",
+          label: { type: "custom", text: "T-shirt size (if applicable)" },
+          type: "dropdown",
+          dropdown: { options: [
+            { label:"S", value:"S" },
+            { label:"M", value:"M" },
+            { label:"L", value:"L" },
+            { label:"XL", value:"XL" }
+          ]},
+          optional: true
+        }
+      ],
 
-    const session = await stripe.checkout.sessions.create(params);
+      success_url: `${req.headers.origin}/?success=true`,
+      cancel_url: `${req.headers.origin}/?canceled=true`,
+    });
 
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error(err);
-    return res.status(400).json({ error: err.message });
+    return res.status(500).send(err.message || "Server error");
   }
 }

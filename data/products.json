@@ -1,20 +1,7 @@
-[
-  {
-    "id": "cap-001",
-    "name": "Full-time catkeeper Cap",
-    "image": "images/hat1.png",
-    "price_hkd": 400,
-    "stripe_price_id": "price_1RwIJoCZXgrpm9QGKvCn7N28",
-    "has_sizes": false,
-    "scale": 0.7
-  },
-  {
-    "id": "tee-001",
-    "name": "T-shirt 'I work hard so my cat can live a better life'",
-    "image": "images/tshirt1.jpg",
-    "price_hkd": 350,
-    "stripe_price_id": "price_1RwIJpCZXgrpm9QG8Cpplm1W",
-    "has_sizes": true,
-    "scale": 0.6
+{
+  "name": "little-market",
+  "private": true,
+  "dependencies": {
+    "stripe": "^16.0.0"
   }
-]
+}

@@ -1,177 +1,177 @@
 <!doctype html>
 <html lang="zh-HK">
-  <head>
-    <meta name="google-site-verification" content="KXjanh8KETC6RCxdO2-GPOKlQdywqmyOk589StJK7xg" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Little Market</title>
+<head>
+<meta name="google-site-verification" content="KXjanh8KETC6RCxdO2-GPOKlQdywqmyOk589StJK7xg" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Little Market</title>
     <title>Full-Time Catkeeper</title>
-    <meta name="Full-time catkeeper" content="Full-time catkeeper" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-      :root{
-        --bg:#ffffff; --text:#1f2937; --muted:#6b7280; --line:#e5e7eb;
-        --accent:#111827; --radius:14px;
-      }
-      *{box-sizing:border-box}
-      html,body{height:100%}
-      body{
-        margin:0;background:var(--bg);color:var(--text);
-        font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', Segoe UI, Roboto, sans-serif;
-        line-height:1.7;
-      }
-      a{color:inherit;text-decoration:none}
-      img{max-width:100%;display:block}
+<meta name="Full-time catkeeper" content="Full-time catkeeper" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+--bg:#ffffff; --text:#1f2937; --muted:#6b7280; --line:#e5e7eb;
+--accent:#111827; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0;background:var(--bg);color:var(--text);
+font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', Segoe UI, Roboto, sans-serif;
+line-height:1.7;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
 
-      .wrap{max-width:1080px;margin:0 auto;padding:24px}
-      header{padding:28px 0 8px;border-bottom:1px solid var(--line)}
-      .brand{display:flex;align-items:center;gap:12px}
-      .logo{width:150px;height:150px;object-fit:contain;display:block}
-      .brand h1{font-size:64px;margin:0;font-weight:900;letter-spacing:0;line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:24px}
+header{padding:28px 0 8px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:150px;height:150px;object-fit:contain;display:block}
+.brand h1{font-size:64px;margin:0;font-weight:900;letter-spacing:0;line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
 
-      .hero{padding:24px 0}
-      .notice{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#4b5563;font-size:14px}
+.hero{padding:24px 0}
+.notice{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#4b5563;font-size:14px}
 
-      .grid{display:grid;grid-template-columns:1fr;gap:34px;margin-top:22px}
-      @media(min-width:800px){.grid{grid-template-columns:repeat(3,1fr)}}
+.grid{display:grid;grid-template-columns:1fr;gap:34px;margin-top:22px}
+@media(min-width:800px){.grid{grid-template-columns:repeat(3,1fr)}}
 
-      .card{
-        border:1px solid var(--line);border-radius:var(--radius);
-        background:#fff;display:flex;flex-direction:column;
-        padding:24px;min-height:540px;
-      }
-      .thumb{
-        width:100%;height:260px;background:#fff;display:flex;
-        align-items:center;justify-content:center;overflow:hidden;
-      }
-      .thumb img{max-width:100%;max-height:100%;height:auto}
-      .scale-100{transform:scale(1)} .scale-90{transform:scale(.9)}
+.card{
+border:1px solid var(--line);border-radius:var(--radius);
+background:#fff;display:flex;flex-direction:column;
+padding:24px;min-height:540px;
+}
+.thumb{
+width:100%;height:260px;background:#fff;display:flex;
+align-items:center;justify-content:center;overflow:hidden;
+}
+.thumb img{max-width:100%;max-height:100%;height:auto}
+.scale-100{transform:scale(1)} .scale-90{transform:scale(.9)}
 
-      /* -------- 讓價錢 & 按鈕固定在最底 -------- */
-      .body{flex:1;display:flex;flex-direction:column;gap:8px;margin-top:12px}
-      .info{flex:1;display:flex;flex-direction:column;gap:6px} /* 上半部：名字+描述，自由高度 */
-      .price-actions{margin-top:auto} /* 下半部：價錢+按鈕，推到最底 */
-      .title{font-size:12px;margin:0}
-      .desc{margin:0;color:var(--muted);font-size:10px}
-      .price{margin:6px 0 10px;font-weight:600;letter-spacing:.02em}
+/* -------- 讓價錢 & 按鈕固定在最底 -------- */
+.body{flex:1;display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.info{flex:1;display:flex;flex-direction:column;gap:6px} /* 上半部：名字+描述，自由高度 */
+.price-actions{margin-top:auto} /* 下半部：價錢+按鈕，推到最底 */
+.title{font-size:12px;margin:0}
+.desc{margin:0;color:var(--muted);font-size:10px}
+.price{margin:6px 0 10px;font-weight:600;letter-spacing:.02em}
 
-      .actions{display:flex;gap:10px}
-      .btn{
-        flex:1;display:inline-flex;align-items:center;justify-content:center;height:40px;
-        border-radius:10px;border:1px solid var(--accent);background:#fff;color:#333;
-        transition:transform .12s ease,box-shadow .12s ease;
-      }
-      .btn:hover{transform:translateY(-1px)}
-      .btn.buy:hover{background:#fb6f92;color:#fff}
+.actions{display:flex;gap:10px}
+.btn{
+flex:1;display:inline-flex;align-items:center;justify-content:center;height:40px;
+border-radius:10px;border:1px solid var(--accent);background:#fff;color:#333;
+transition:transform .12s ease,box-shadow .12s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn.buy:hover{background:#fb6f92;color:#fff}
 
-      footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px}
-    </style>
-  </head>
-  <body>
-    <div class="wrap">
-      <header>
-        <div class="brand">
-          <img class="logo" src="images/logo.jpg" alt="The Little Market Logo" />
-          <h1>The Little Market</h1>
-        </div>
-      </header>
+footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="brand">
+<img class="logo" src="images/logo.jpg" alt="The Little Market Logo" />
+<h1>The Little Market</h1>
+</div>
+</header>
 
-      <section class="grid">
-        <!-- Card 1 -->
-        <article class="card">
-          <div class="thumb"><img class="scale-100" src="images/hat1.png" alt="Full-time catkeeper Cap" /></div>
-          <div class="body">
-            <div class="info">
-              <h3 class="title">Full-time catkeeper Cap</h3>
-              <p class="desc">One Size</p>
-            </div>
-            <div class="price-actions">
-              <div class="price">HK$ 400</div>
-              <div class="actions">
-                <a class="btn buy" href="https://buy.stripe.com/test_28EcN47k1djb0Oh6TIdwc02" target="_blank" rel="noopener">BUY NOW</a>
-              </div>
-            </div>
-          </div>
-        </article>
+<section class="grid">
+<!-- Card 1 -->
+<article class="card">
+<div class="thumb"><img class="scale-100" src="images/hat1.png" alt="Full-time catkeeper Cap" /></div>
+<div class="body">
+<div class="info">
+<h3 class="title">Full-time catkeeper Cap</h3>
+<p class="desc">One Size</p>
+</div>
+<div class="price-actions">
+<div class="price">HK$ 400</div>
+<div class="actions">
+<a class="btn buy" href="https://buy.stripe.com/test_28EcN47k1djb0Oh6TIdwc02" target="_blank" rel="noopener">BUY NOW</a>
+</div>
+</div>
+</div>
+</article>
 
-        <!-- Card 2 -->
-        <article class="card">
-          <div class="thumb"><img class="scale-90" src="images/tshirt3.png" alt="T-shirt 'Full-time catkeeper'" /></div>
-          <div class="body">
-            <div class="info">
-              <h3 class="title">T-shirt 'Full-time catkeeper'</h3>
-              <p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
-            </div>
-            <div class="price-actions">
-              <div class="price">HK$ 380</div>
-              <div class="actions">
-                <a class="btn buy" href="https://buy.stripe.com/dRm6oGh1k9Zl98t8imfjG03" target="_blank" rel="noopener">BUY NOW</a>
-              </div>
-            </div>
-          </div>
-        </article>
+<!-- Card 2 -->
+<article class="card">
+<div class="thumb"><img class="scale-90" src="images/tshirt3.png" alt="T-shirt 'Full-time catkeeper'" /></div>
+<div class="body">
+<div class="info">
+<h3 class="title">T-shirt 'Full-time catkeeper'</h3>
+<p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
+</div>
+<div class="price-actions">
+<div class="price">HK$ 380</div>
+<div class="actions">
+<a class="btn buy" href="https://buy.stripe.com/dRm6oGh1k9Zl98t8imfjG03" target="_blank" rel="noopener">BUY NOW</a>
+</div>
+</div>
+</div>
+</article>
 
-        <!-- Card 3 -->
-        <article class="card">
-          <div class="thumb"><img class="scale-90" src="images/tshirt1.png" alt="T-shirt 'I work hard so my cat can live a better life'" /></div>
-          <div class="body">
-            <div class="info">
-              <h3 class="title">T-shirt 'I work hard so my cat can live a better life'</h3>
-              <p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
-            </div>
-            <div class="price-actions">
-              <div class="price">HK$ 380</div>
-              <div class="actions">
-                <a class="btn buy" href="https://buy.stripe.com/6oU5kC26q0oLacx0PUfjG02" target="_blank" rel="noopener">BUY NOW</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </section>
+<!-- Card 3 -->
+<article class="card">
+<div class="thumb"><img class="scale-90" src="images/tshirt1.png" alt="T-shirt 'I work hard so my cat can live a better life'" /></div>
+<div class="body">
+<div class="info">
+<h3 class="title">T-shirt 'I work hard so my cat can live a better life'</h3>
+<p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
+</div>
+<div class="price-actions">
+<div class="price">HK$ 380</div>
+<div class="actions">
+<a class="btn buy" href="https://buy.stripe.com/6oU5kC26q0oLacx0PUfjG02" target="_blank" rel="noopener">BUY NOW</a>
+</div>
+</div>
+</div>
+</article>
+</section>
 
-      <footer>
-        <div>© <span id="year"></span> The Little Market </div>
-      </footer>
-    </div>
-    <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-    <!-- === Multi-item Cart UI & Stripe Checkout (injected) === -->
+<footer>
+<div>© <span id="year"></span> The Little Market </div>
+</footer>
+</div>
+<script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+<!-- === Multi-item Cart UI & Stripe Checkout (injected) === -->
 <div id="cart" style="position:fixed;right:16px;bottom:16px;z-index:50;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:16px;width:320px;display:none">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <strong>Cart</strong>
-    <button id="closeCart" aria-label="Close" style="border:none;background:transparent;font-size:18px;cursor:pointer">×</button>
-  </div>
-  <div id="cartItems" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto"></div>
-  <div style="display:flex;justify-content:space-between;margin-top:12px">
-    <span>Total</span><strong id="cartTotal">HK$ 0</strong>
-  </div>
-  <button id="checkoutBtn" style="margin-top:12px;height:44px;border-radius:10px;border:1px solid #111827;background:#111827;color:#fff;width:100%;cursor:pointer">Checkout</button>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+<strong>Cart</strong>
+<button id="closeCart" aria-label="Close" style="border:none;background:transparent;font-size:18px;cursor:pointer">×</button>
+</div>
+<div id="cartItems" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto"></div>
+<div style="display:flex;justify-content:space-between;margin-top:12px">
+<span>Total</span><strong id="cartTotal">HK$ 0</strong>
+</div>
+<button id="checkoutBtn" style="margin-top:12px;height:44px;border-radius:10px;border:1px solid #111827;background:#111827;color:#fff;width:100%;cursor:pointer">Checkout</button>
 </div>
 <button id="openCart" style="position:fixed;right:16px;bottom:16px;height:44px;border-radius:999px;border:1px solid #111827;background:#fff;color:#111827;padding:0 16px;cursor:pointer">🛒 Cart (0)</button>
 
 <script>
 // === Catalog: map your products to Stripe Price IDs (replace placeholders) ===
 const CATALOG = {
-  "cap":     { name: "Full-time catkeeper Cap",        priceId: "price_1RwIJoCZXgrpm9QGKvCn7N28",    unitAmount: 40000, currency:"hkd" },
-  "tee_ftc": { name: "T-shirt 'Full-time catkeeper'",  priceId: "price_1RxlUgCZXgrpm9QGpfdOzJNd", unitAmount: 38000, currency:"hkd",
-               sizeOptions: ["S","M","L","XL"] },
-  "tee_cat": { name: "T-shirt 'I work hard…'",         priceId: "price_1RxlVjCZXgrpm9QG1H2eJRM7", unitAmount: 38000, currency:"hkd",
-               sizeOptions: ["S","M","L","XL"] },
+"cap":     { name: "Full-time catkeeper Cap",        priceId: "price_1RwIJoCZXgrpm9QGKvCn7N28",    unitAmount: 40000, currency:"hkd" },
+"tee_ftc": { name: "T-shirt 'Full-time catkeeper'",  priceId: "price_1RxlUgCZXgrpm9QGpfdOzJNd", unitAmount: 38000, currency:"hkd",
+sizeOptions: ["S","M","L","XL"] },
+"tee_cat": { name: "T-shirt 'I work hard…'",         priceId: "price_1RxlVjCZXgrpm9QG1H2eJRM7", unitAmount: 38000, currency:"hkd",
+sizeOptions: ["S","M","L","XL"] },
 };
 
 // === Replace existing BUY NOW links with Add-to-cart UI on each card ===
 function addButtons(){
-  const cards = document.querySelectorAll("article.card .actions");
-  if (cards.length >= 1){
-    cards[0].innerHTML = '<button class="btn buy" data-sku="cap" style="width:100%">Add to cart</button>';
-  }
-  if (cards.length >= 2){
-    cards[1].innerHTML = '<div style="display:flex;gap:8px;width:100%"><select class="sizeSel" aria-label="Size" style="flex:1;height:40px;border:1px solid #e5e7eb;border-radius:10px;padding:0 8px"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option></select><button class="btn buy" data-sku="tee_ftc" style="flex:1">Add</button></div>';
-  }
-  if (cards.length >= 3){
-    cards[2].innerHTML = '<div style="display:flex;gap:8px;width:100%"><select class="sizeSel" aria-label="Size" style="flex:1;height:40px;border:1px solid #e5e7eb;border-radius:10px;padding:0 8px"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option></select><button class="btn buy" data-sku="tee_cat" style="flex:1">Add</button></div>';
-  }
+const cards = document.querySelectorAll("article.card .actions");
+if (cards.length >= 1){
+cards[0].innerHTML = '<button class="btn buy" data-sku="cap" style="width:100%">Add to cart</button>';
+}
+if (cards.length >= 2){
+cards[1].innerHTML = '<div style="display:flex;gap:8px;width:100%"><select class="sizeSel" aria-label="Size" style="flex:1;height:40px;border:1px solid #e5e7eb;border-radius:10px;padding:0 8px"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option></select><button class="btn buy" data-sku="tee_ftc" style="flex:1">Add</button></div>';
+}
+if (cards.length >= 3){
+cards[2].innerHTML = '<div style="display:flex;gap:8px;width:100%"><select class="sizeSel" aria-label="Size" style="flex:1;height:40px;border:1px solid #e5e7eb;border-radius:10px;padding:0 8px"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option></select><button class="btn buy" data-sku="tee_cat" style="flex:1">Add</button></div>';
+}
 }
 addButtons();
 
@@ -185,98 +185,98 @@ const elTotal    = document.getElementById("cartTotal");
 const elCheckout = document.getElementById("checkoutBtn");
 
 function render(){
-  elItems.innerHTML = "";
-  let total = 0, count = 0;
-  cart.forEach((item, idx)=>{
-    const priceHKD = (item.unitAmount/100).toFixed(0);
-    total += item.unitAmount * item.quantity;
-    count += item.quantity;
-    const opt = item.size ? ' · ' + item.size : '';
-    const row = document.createElement("div");
-    row.style.display = "flex";
-    row.style.justifyContent = "space-between";
-    row.style.alignItems = "center";
-    row.style.gap = "8px";
-    row.innerHTML = `
-      <div style="display:flex;flex-direction:column">
-        <strong>${item.name}${opt}</strong>
-        <small>HK$ ${priceHKD}</small>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px">
-        <button data-idx="${idx}" data-act="dec" style="width:28px;height:28px;border:1px solid #e5e7eb;border-radius:8px;background:#fff">-</button>
-        <span>${item.quantity}</span>
-        <button data-idx="${idx}" data-act="inc" style="width:28px;height:28px;border:1px solid #e5e7eb;border-radius:8px;background:#fff">+</button>
-        <button data-idx="${idx}" data-act="del" style="margin-left:8px;border:none;background:transparent">🗑️</button>
-      </div>`;
-    elItems.appendChild(row);
-  });
-  elTotal.textContent = 'HK$ ' + (total/100).toFixed(0);
-  elOpenCart.textContent = '🛒 Cart (' + count + ')';
+elItems.innerHTML = "";
+let total = 0, count = 0;
+cart.forEach((item, idx)=>{
+const priceHKD = (item.unitAmount/100).toFixed(0);
+total += item.unitAmount * item.quantity;
+count += item.quantity;
+const opt = item.size ? ' · ' + item.size : '';
+const row = document.createElement("div");
+row.style.display = "flex";
+row.style.justifyContent = "space-between";
+row.style.alignItems = "center";
+row.style.gap = "8px";
+row.innerHTML = `
+     <div style="display:flex;flex-direction:column">
+       <strong>${item.name}${opt}</strong>
+       <small>HK$ ${priceHKD}</small>
+     </div>
+     <div style="display:flex;align-items:center;gap:6px">
+       <button data-idx="${idx}" data-act="dec" style="width:28px;height:28px;border:1px solid #e5e7eb;border-radius:8px;background:#fff">-</button>
+       <span>${item.quantity}</span>
+       <button data-idx="${idx}" data-act="inc" style="width:28px;height:28px;border:1px solid #e5e7eb;border-radius:8px;background:#fff">+</button>
+       <button data-idx="${idx}" data-act="del" style="margin-left:8px;border:none;background:transparent">🗑️</button>
+     </div>`;
+elItems.appendChild(row);
+});
+elTotal.textContent = 'HK$ ' + (total/100).toFixed(0);
+elOpenCart.textContent = '🛒 Cart (' + count + ')';
 }
 
 function upsertCart(sku, size){
-  const base = CATALOG[sku];
-  const key = sku + (size? '_' + size : '');
-  const existing = cart.find(i => i.key === key);
-  if (existing) { existing.quantity += 1; }
-  else {
-    cart.push({
-      key, sku, size,
-      name: base.name,
-      priceId: base.priceId,
-      unitAmount: base.unitAmount,
-      currency: base.currency,
-      quantity: 1
-    });
-  }
-  render();
+const base = CATALOG[sku];
+const key = sku + (size? '_' + size : '');
+const existing = cart.find(i => i.key === key);
+if (existing) { existing.quantity += 1; }
+else {
+cart.push({
+key, sku, size,
+name: base.name,
+priceId: base.priceId,
+unitAmount: base.unitAmount,
+currency: base.currency,
+quantity: 1
+});
+}
+render();
 }
 
 document.body.addEventListener("click", (e)=>{
-  const addBtn = e.target.closest(".btn.buy");
-  if (addBtn){
-    const sku = addBtn.dataset.sku;
-    let size = null;
-    const parent = addBtn.closest(".actions");
-    const sel = parent && parent.querySelector(".sizeSel");
-    if (sel){
-      if (!sel.value){ alert("請先選擇尺碼 / Please select a size"); return; }
-      size = sel.value;
-    }
-    upsertCart(sku, size);
-  }
-  if (e.target.id === "openCart"){ elCart.style.display = "block"; }
-  if (e.target.id === "closeCart"){ elCart.style.display = "none"; }
+const addBtn = e.target.closest(".btn.buy");
+if (addBtn){
+const sku = addBtn.dataset.sku;
+let size = null;
+const parent = addBtn.closest(".actions");
+const sel = parent && parent.querySelector(".sizeSel");
+if (sel){
+if (!sel.value){ alert("請先選擇尺碼 / Please select a size"); return; }
+size = sel.value;
+}
+upsertCart(sku, size);
+}
+if (e.target.id === "openCart"){ elCart.style.display = "block"; }
+if (e.target.id === "closeCart"){ elCart.style.display = "none"; }
 
-  if (e.target.dataset && e.target.dataset.act){
-    const idx = Number(e.target.dataset.idx);
-    const act = e.target.dataset.act;
-    if (act === "inc") cart[idx].quantity += 1;
-    if (act === "dec") cart[idx].quantity = Math.max(1, cart[idx].quantity - 1);
-    if (act === "del") cart.splice(idx,1);
-    render();
-  }
+if (e.target.dataset && e.target.dataset.act){
+const idx = Number(e.target.dataset.idx);
+const act = e.target.dataset.act;
+if (act === "inc") cart[idx].quantity += 1;
+if (act === "dec") cart[idx].quantity = Math.max(1, cart[idx].quantity - 1);
+if (act === "del") cart.splice(idx,1);
+render();
+}
 });
 
 elCheckout.addEventListener("click", async ()=>{
-  if (!cart.length){ alert("Cart is empty"); return; }
-  const res = await fetch("/api/checkout", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ items: cart.map(i=>({ priceId: i.priceId, quantity: i.quantity, size: i.size || null, name: i.name })) })
-  });
-  if (!res.ok){
-    const msg = await res.text();
-    alert("Checkout error: " + msg);
-    return;
-  }
-  const { url } = await res.json();
-  window.location = url;
+if (!cart.length){ alert("Cart is empty"); return; }
+const res = await fetch("/api/checkout", {
+method:"POST",
+headers:{ "Content-Type":"application/json" },
+body: JSON.stringify({ items: cart.map(i=>({ priceId: i.priceId, quantity: i.quantity, size: i.size || null, name: i.name })) })
+});
+if (!res.ok){
+const msg = await res.text();
+alert("Checkout error: " + msg);
+return;
+}
+const { url } = await res.json();
+window.location = url;
 });
 
 render();
 </script>
 <!-- === End Multi-item Cart === -->
 
-  </body>
+</body>
 </html>

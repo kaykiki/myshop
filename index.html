@@ -1,12 +1,10 @@
 <!doctype html>
 <html lang="zh-HK">
   <head>
-    <meta name="google-site-verification" content="KXjanh8KETC6RCxdO2-GPOKlQdywqmyOk589StJK7xg" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>The Little Market</title>
-    <title>Full-Time Catkeeper</title>
-    <meta name="Full-time catkeeper" content="Full-time catkeeper" />
+    <meta name="description" content="The Little Market" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -19,7 +17,7 @@
       html,body{height:100%}
       body{
         margin:0;background:var(--bg);color:var(--text);
-        font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', Segoe UI, Roboto, sans-serif;
+        font-family:'Noto Sans JP',-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN',Segoe UI,Roboto,Helvetica,Arial,sans-serif;
         line-height:1.7;
       }
       a{color:inherit;text-decoration:none}
@@ -29,7 +27,7 @@
       header{padding:28px 0 8px;border-bottom:1px solid var(--line)}
       .brand{display:flex;align-items:center;gap:12px}
       .logo{width:150px;height:150px;object-fit:contain;display:block}
-      .brand h1{font-size:64px;margin:0;font-weight:900;letter-spacing:0;line-height:1;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif}
+      .brand h1{font-size:15px;margin:0;font-weight:700;letter-spacing:.02em}
 
       .hero{padding:24px 0}
       .notice{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:#4b5563;font-size:14px}
@@ -43,16 +41,20 @@
         padding:24px;min-height:540px;
       }
       .thumb{
-        width:100%;height:260px;background:#fff;display:flex;
-        align-items:center;justify-content:center;overflow:hidden;
+        width:100%;height:260px;background:#fff;
+        display:flex;align-items:center;justify-content:center;overflow:hidden;
+        cursor:pointer;
       }
-      .thumb img{max-width:100%;max-height:100%;height:auto}
-      .scale-100{transform:scale(1)} .scale-90{transform:scale(.9)}
+      .thumb .zoom{display:inline-block;transition:transform .25s ease;will-change:transform}
+      .card:hover .thumb .zoom{transform:scale(1.06)}
 
-      /* -------- 讓價錢 & 按鈕固定在最底 -------- */
+      .thumb img{max-width:100%;max-height:100%;height:auto}
+      .scale-100{transform:scale(1)}
+      .scale-90{transform:scale(.9)}
+
       .body{flex:1;display:flex;flex-direction:column;gap:8px;margin-top:12px}
-      .info{flex:1;display:flex;flex-direction:column;gap:6px} /* 上半部：名字+描述，自由高度 */
-      .price-actions{margin-top:auto} /* 下半部：價錢+按鈕，推到最底 */
+      .info{flex:1;display:flex;flex-direction:column;gap:6px}
+      .price-actions{margin-top:auto}
       .title{font-size:12px;margin:0}
       .desc{margin:0;color:var(--muted);font-size:10px}
       .price{margin:6px 0 10px;font-weight:600;letter-spacing:.02em}
@@ -67,6 +69,25 @@
       .btn.buy:hover{background:#fb6f92;color:#fff}
 
       footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px}
+
+      /* ===== Lightbox ===== */
+      .lightbox {
+        position: fixed; top:0; left:0; width:100%; height:100%;
+        background: rgba(0,0,0,0.85);
+        display: flex; align-items:center; justify-content:center;
+        visibility:hidden; opacity:0;
+        transition: opacity .25s ease;
+        z-index: 1000;
+      }
+      .lightbox.active { visibility:visible; opacity:1; }
+      .lightbox img {
+        max-width:90%; max-height:90%;
+        box-shadow:0 8px 20px rgba(0,0,0,0.5);
+      }
+      .lightbox-close {
+        position:absolute; top:20px; right:30px;
+        font-size:30px; color:#fff; cursor:pointer;
+      }
     </style>
   </head>
   <body>
@@ -78,10 +99,18 @@
         </div>
       </header>
 
+      <section class="hero">
+        <div class="notice">The Little Market is a tiny yet delightful market full of surprises.</div>
+      </section>
+
       <section class="grid">
         <!-- Card 1 -->
         <article class="card">
-          <div class="thumb"><img class="scale-100" src="images/hat1.png" alt="Full-time catkeeper Cap" /></div>
+          <div class="thumb">
+            <div class="zoom">
+              <img class="scale-100" src="images/hat1.png" alt="Full-time catkeeper Cap" />
+            </div>
+          </div>
           <div class="body">
             <div class="info">
               <h3 class="title">Full-time catkeeper Cap</h3>
@@ -98,7 +127,11 @@
 
         <!-- Card 2 -->
         <article class="card">
-          <div class="thumb"><img class="scale-90" src="images/tshirt3.png" alt="T-shirt 'Full-time catkeeper'" /></div>
+          <div class="thumb">
+            <div class="zoom">
+              <img class="scale-90" src="images/tshirt3.png" alt="T-shirt 'Full-time catkeeper'" />
+            </div>
+          </div>
           <div class="body">
             <div class="info">
               <h3 class="title">T-shirt 'Full-time catkeeper'</h3>
@@ -115,7 +148,11 @@
 
         <!-- Card 3 -->
         <article class="card">
-          <div class="thumb"><img class="scale-90" src="images/tshirt1.png" alt="T-shirt 'I work hard so my cat can live a better life'" /></div>
+          <div class="thumb">
+            <div class="zoom">
+              <img class="scale-90" src="images/tshirt1.png" alt="T-shirt 'I work hard so my cat can live a better life'" />
+            </div>
+          </div>
           <div class="body">
             <div class="info">
               <h3 class="title">T-shirt 'I work hard so my cat can live a better life'</h3>
@@ -132,151 +169,37 @@
       </section>
 
       <footer>
-        <div>© <span id="year"></span> The Little Market </div>
+        <div>© <span id="year"></span> The Little Market · </div>
       </footer>
     </div>
-    <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-    <!-- === Multi-item Cart UI & Stripe Checkout (injected) === -->
-<div id="cart" style="position:fixed;right:16px;bottom:16px;z-index:50;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.08);padding:16px;width:320px;display:none">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-    <strong>Cart</strong>
-    <button id="closeCart" aria-label="Close" style="border:none;background:transparent;font-size:18px;cursor:pointer">×</button>
-  </div>
-  <div id="cartItems" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto"></div>
-  <div style="display:flex;justify-content:space-between;margin-top:12px">
-    <span>Total</span><strong id="cartTotal">HK$ 0</strong>
-  </div>
-  <button id="checkoutBtn" style="margin-top:12px;height:44px;border-radius:10px;border:1px solid #111827;background:#111827;color:#fff;width:100%;cursor:pointer">Checkout</button>
-</div>
-<button id="openCart" style="position:fixed;right:16px;bottom:16px;height:44px;border-radius:999px;border:1px solid #111827;background:#fff;color:#111827;padding:0 16px;cursor:pointer">🛒 Cart (0)</button>
 
-<script>
-// === Catalog: map your products to Stripe Price IDs (replace placeholders) ===
-const CATALOG = {
-  "cap":     { name: "Full-time catkeeper Cap",        priceId: "price_1RwIJoCZXgrpm9QGKvCn7N28",    unitAmount: 40000, currency:"hkd" },
-  "tee_ftc": { name: "T-shirt 'Full-time catkeeper'",  priceId: "price_1RxlUgCZXgrpm9QGpfdOzJNd", unitAmount: 38000, currency:"hkd",
-               sizeOptions: ["S","M","L","XL"] },
-  "tee_cat": { name: "T-shirt 'I work hard…'",         priceId: "price_1RxlVjCZXgrpm9QG1H2eJRM7", unitAmount: 38000, currency:"hkd",
-               sizeOptions: ["S","M","L","XL"] },
-};
+    <!-- Lightbox HTML -->
+    <div class="lightbox" id="lightbox">
+      <span class="lightbox-close" id="lightboxClose">&times;</span>
+      <img id="lightboxImg" src="" alt="">
+    </div>
 
-// === Replace existing BUY NOW links with Add-to-cart UI on each card ===
-function addButtons(){
-  const cards = document.querySelectorAll("article.card .actions");
-  if (cards.length >= 1){
-    cards[0].innerHTML = '<button class="btn buy" data-sku="cap" style="width:100%">Add to cart</button>';
-  }
-  if (cards.length >= 2){
-    cards[1].innerHTML = '<div style="display:flex;gap:8px;width:100%"><select class="sizeSel" aria-label="Size" style="flex:1;height:40px;border:1px solid #e5e7eb;border-radius:10px;padding:0 8px"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option></select><button class="btn buy" data-sku="tee_ftc" style="flex:1">Add</button></div>';
-  }
-  if (cards.length >= 3){
-    cards[2].innerHTML = '<div style="display:flex;gap:8px;width:100%"><select class="sizeSel" aria-label="Size" style="flex:1;height:40px;border:1px solid #e5e7eb;border-radius:10px;padding:0 8px"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option></select><button class="btn buy" data-sku="tee_cat" style="flex:1">Add</button></div>';
-  }
-}
-addButtons();
+    <script>
+      document.getElementById('year').textContent=new Date().getFullYear();
 
-// === Simple in-memory cart ===
-const cart = [];
-const elCart     = document.getElementById("cart");
-const elOpenCart = document.getElementById("openCart");
-const elClose    = document.getElementById("closeCart");
-const elItems    = document.getElementById("cartItems");
-const elTotal    = document.getElementById("cartTotal");
-const elCheckout = document.getElementById("checkoutBtn");
+      // Lightbox 功能
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.getElementById('lightboxClose');
 
-function render(){
-  elItems.innerHTML = "";
-  let total = 0, count = 0;
-  cart.forEach((item, idx)=>{
-    const priceHKD = (item.unitAmount/100).toFixed(0);
-    total += item.unitAmount * item.quantity;
-    count += item.quantity;
-    const opt = item.size ? ' · ' + item.size : '';
-    const row = document.createElement("div");
-    row.style.display = "flex";
-    row.style.justifyContent = "space-between";
-    row.style.alignItems = "center";
-    row.style.gap = "8px";
-    row.innerHTML = `
-      <div style="display:flex;flex-direction:column">
-        <strong>${item.name}${opt}</strong>
-        <small>HK$ ${priceHKD}</small>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px">
-        <button data-idx="${idx}" data-act="dec" style="width:28px;height:28px;border:1px solid #e5e7eb;border-radius:8px;background:#fff">-</button>
-        <span>${item.quantity}</span>
-        <button data-idx="${idx}" data-act="inc" style="width:28px;height:28px;border:1px solid #e5e7eb;border-radius:8px;background:#fff">+</button>
-        <button data-idx="${idx}" data-act="del" style="margin-left:8px;border:none;background:transparent">🗑️</button>
-      </div>`;
-    elItems.appendChild(row);
-  });
-  elTotal.textContent = 'HK$ ' + (total/100).toFixed(0);
-  elOpenCart.textContent = '🛒 Cart (' + count + ')';
-}
+      document.querySelectorAll('.thumb img').forEach(img => {
+        img.addEventListener('click', () => {
+          lightboxImg.src = img.src;
+          lightbox.classList.add('active');
+        });
+      });
 
-function upsertCart(sku, size){
-  const base = CATALOG[sku];
-  const key = sku + (size? '_' + size : '');
-  const existing = cart.find(i => i.key === key);
-  if (existing) { existing.quantity += 1; }
-  else {
-    cart.push({
-      key, sku, size,
-      name: base.name,
-      priceId: base.priceId,
-      unitAmount: base.unitAmount,
-      currency: base.currency,
-      quantity: 1
-    });
-  }
-  render();
-}
-
-document.body.addEventListener("click", (e)=>{
-  const addBtn = e.target.closest(".btn.buy");
-  if (addBtn){
-    const sku = addBtn.dataset.sku;
-    let size = null;
-    const parent = addBtn.closest(".actions");
-    const sel = parent && parent.querySelector(".sizeSel");
-    if (sel){
-      if (!sel.value){ alert("請先選擇尺碼 / Please select a size"); return; }
-      size = sel.value;
-    }
-    upsertCart(sku, size);
-  }
-  if (e.target.id === "openCart"){ elCart.style.display = "block"; }
-  if (e.target.id === "closeCart"){ elCart.style.display = "none"; }
-
-  if (e.target.dataset && e.target.dataset.act){
-    const idx = Number(e.target.dataset.idx);
-    const act = e.target.dataset.act;
-    if (act === "inc") cart[idx].quantity += 1;
-    if (act === "dec") cart[idx].quantity = Math.max(1, cart[idx].quantity - 1);
-    if (act === "del") cart.splice(idx,1);
-    render();
-  }
-});
-
-elCheckout.addEventListener("click", async ()=>{
-  if (!cart.length){ alert("Cart is empty"); return; }
-  const res = await fetch("/api/checkout", {
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body: JSON.stringify({ items: cart.map(i=>({ priceId: i.priceId, quantity: i.quantity, size: i.size || null, name: i.name })) })
-  });
-  if (!res.ok){
-    const msg = await res.text();
-    alert("Checkout error: " + msg);
-    return;
-  }
-  const { url } = await res.json();
-  window.location = url;
-});
-
-render();
-</script>
-<!-- === End Multi-item Cart === -->
-
+      closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+      lightbox.addEventListener('click', e => {
+        if (e.target.id === 'lightbox') {
+          lightbox.classList.remove('active');
+        }
+      });
+    </script>
   </body>
 </html>

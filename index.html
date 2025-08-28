@@ -67,6 +67,7 @@ transition:transform .12s ease,box-shadow .12s ease;
 .btn.buy:hover{background:#fb6f92;color:#fff}
 
 footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var(--muted);font-size:14px}
+
       /* ===== Lightbox ===== */
       .lightbox {
         position: fixed; top:0; left:0; width:100%; height:100%;
@@ -85,69 +86,86 @@ footer{border-top:1px solid var(--line);margin-top:28px;padding:18px 0;color:var
         position:absolute; top:20px; right:30px;
         font-size:30px; color:#fff; cursor:pointer;
       }
-</style>
-</head>
-<body>
-<div class="wrap">
-<header>
-<div class="brand">
-<img class="logo" src="images/logo.jpg" alt="The Little Market Logo" />
-<h1>The Little Market</h1>
-</div>
-</header>
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">
+          <img class="logo" src="images/logo.jpg" alt="The Little Market Logo" />
+          <h1>The Little Market</h1>
+        </div>
+      </header>
 
-<section class="grid">
-<!-- Card 1 -->
-<article class="card">
-<div class="thumb"><img class="scale-100" src="images/hat1.png" alt="Full-time catkeeper Cap" /></div>
-<div class="body">
-<div class="info">
-<h3 class="title">Full-time catkeeper Cap</h3>
-<p class="desc">One Size</p>
-</div>
-<div class="price-actions">
-<div class="price">HK$ 400</div>
-<div class="actions">
-<a class="btn buy" href="https://buy.stripe.com/test_28EcN47k1djb0Oh6TIdwc02" target="_blank" rel="noopener">BUY NOW</a>
-</div>
-</div>
-</div>
-</article>
+      <section class="hero">
+        <div class="notice">The Little Market is a tiny yet delightful market full of surprises.</div>
+      </section>
 
-<!-- Card 2 -->
-<article class="card">
-<div class="thumb"><img class="scale-90" src="images/tshirt3.png" alt="T-shirt 'Full-time catkeeper'" /></div>
-<div class="body">
-<div class="info">
-<h3 class="title">T-shirt 'Full-time catkeeper'</h3>
-<p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
-</div>
-<div class="price-actions">
-<div class="price">HK$ 380</div>
-<div class="actions">
-<a class="btn buy" href="https://buy.stripe.com/dRm6oGh1k9Zl98t8imfjG03" target="_blank" rel="noopener">BUY NOW</a>
-</div>
-</div>
-</div>
-</article>
+      <section class="grid">
+        <!-- Card 1 -->
+        <article class="card">
+          <div class="thumb">
+            <div class="zoom">
+              <img class="scale-100" src="images/hat1.png" alt="Full-time catkeeper Cap" />
+            </div>
+          </div>
+          <div class="body">
+            <div class="info">
+              <h3 class="title">Full-time catkeeper Cap</h3>
+              <p class="desc">One Size</p>
+            </div>
+            <div class="price-actions">
+              <div class="price">HK$ 400</div>
+              <div class="actions">
+                <a class="btn buy" href="https://buy.stripe.com/test_28EcN47k1djb0Oh6TIdwc02" target="_blank" rel="noopener">BUY NOW</a>
+              </div>
+            </div>
+          </div>
+        </article>
 
-<!-- Card 3 -->
-<article class="card">
-<div class="thumb"><img class="scale-90" src="images/tshirt1.png" alt="T-shirt 'I work hard so my cat can live a better life'" /></div>
-<div class="body">
-<div class="info">
-<h3 class="title">T-shirt 'I work hard so my cat can live a better life'</h3>
-<p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
-</div>
-<div class="price-actions">
-<div class="price">HK$ 380</div>
-<div class="actions">
-<a class="btn buy" href="https://buy.stripe.com/6oU5kC26q0oLacx0PUfjG02" target="_blank" rel="noopener">BUY NOW</a>
-</div>
-</div>
-</div>
-</article>
-</section>
+        <!-- Card 2 -->
+        <article class="card">
+          <div class="thumb">
+            <div class="zoom">
+              <img class="scale-90" src="images/tshirt3.png" alt="T-shirt 'Full-time catkeeper'" />
+            </div>
+          </div>
+          <div class="body">
+            <div class="info">
+              <h3 class="title">T-shirt 'Full-time catkeeper'</h3>
+              <p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
+            </div>
+            <div class="price-actions">
+              <div class="price">HK$ 380</div>
+              <div class="actions">
+                <a class="btn buy" href="https://buy.stripe.com/dRm6oGh1k9Zl98t8imfjG03" target="_blank" rel="noopener">BUY NOW</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="card">
+          <div class="thumb">
+            <div class="zoom">
+              <img class="scale-90" src="images/tshirt1.png" alt="T-shirt 'I work hard so my cat can live a better life'" />
+            </div>
+          </div>
+          <div class="body">
+            <div class="info">
+              <h3 class="title">T-shirt 'I work hard so my cat can live a better life'</h3>
+              <p class="desc"><strong>Size (S / M / L / XL) will be selected on the checkout page</strong></p>
+            </div>
+            <div class="price-actions">
+              <div class="price">HK$ 380</div>
+              <div class="actions">
+                <a class="btn buy" href="https://buy.stripe.com/6oU5kC26q0oLacx0PUfjG02" target="_blank" rel="noopener">BUY NOW</a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
 
 <footer>
 <div>© <span id="year"></span> The Little Market </div>
